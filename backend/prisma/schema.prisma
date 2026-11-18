@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+  
+enum RiskLevel { 
+  LOW 
+  MEDIUM 
+  HIGH
+}
+model Analysis { 
+  id   String @id @default(uuid()) @db.Uuid 
+  score Int 
+  indicators Json  
+  createdAt DateTime @default(now()) 
+  updateAt DateTime @updatedAt  
+  riskLevel RiskLevel 
+  url  String 
+
+@@map("analyses")
+}
